@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/characterListFragment"
-            android:name="com.project.template.ui.main.draft.CharacterListFragment"
+            android:name="com.project.template.ui.main.draft.UserCharacterListFragment"
             android:label="UserFragment"
             tools:layout="@layout/fragment_character_list">
         <action android:id="@+id/action_CharacterListFragment_to_CharacterDetailFragment"
@@ -15,7 +15,7 @@
     </fragment>
 
     <fragment android:id="@+id/characterDetailFragment"
-              android:name="com.project.template.ui.main.draft.CharacterDetailFragment"
+              android:name="com.project.template.ui.main.draft.UserCharacterDetailFragment"
               android:label="fragment_user_detail"
               tools:layout="@layout/fragment_character_detail">
 

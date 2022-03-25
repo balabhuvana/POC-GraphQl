@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.flow
 
 class GraphqlRdsFlow(var apolloClient: ApolloClient) {
 
-    fun fetchCharacterListRDSCall() =
+    fun fetchUserCharacterListRDSCall() =
         flow {
             emit(apolloClient.query(CharactersListQuery()).await())
         }
 
-    fun fetchCharacterDetailRDSCall(userId: String) =
+    fun fetchUserCharacterDetailRDSCall(userId: String) =
         flow {
             emit(apolloClient.query(CharacterQuery(userId)).await())
         }

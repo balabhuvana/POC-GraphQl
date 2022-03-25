@@ -2,7 +2,7 @@ package com.project.template.repo.draft
 
 class GraphqlRepoFlow(var graphqlRdsFlow: GraphqlRdsFlow) {
 
-    fun fetchCharacterListRDSCall() = graphqlRdsFlow.fetchCharacterListRDSCall()
+    fun fetchUserCharacterListRDSCall() = graphqlRdsFlow.fetchUserCharacterListRDSCall()
 
-    fun fetchCharacterDetailRDSCall(userId: String) = graphqlRdsFlow.fetchCharacterDetailRDSCall(userId)
+    fun fetchUserCharacterDetailRDSCall(userId: String) = graphqlRdsFlow.fetchUserCharacterDetailRDSCall(userId)
 }

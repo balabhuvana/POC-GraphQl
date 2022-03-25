@@ -2,46 +2,44 @@ package com.project.template.repo.draft
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.project.template.CharacterQuery
-import com.project.template.model.CharacterDetailUIState
-import com.project.template.model.CharacterListUIState
+import com.project.template.model.UserCharacterDetailUIState
+import com.project.template.model.UserCharacterListUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class GraphqlViewModel : ViewModel() {
 
     private val _uiState =
-        MutableStateFlow<CharacterListUIState>(CharacterListUIState.Success(emptyList()))
+        MutableStateFlow<UserCharacterListUIState>(UserCharacterListUIState.Success(emptyList()))
 
-    val uiState: StateFlow<CharacterListUIState> = _uiState
+    val uiState: StateFlow<UserCharacterListUIState> = _uiState
 
     private val _characterUiState =
-        MutableStateFlow<CharacterDetailUIState>(CharacterDetailUIState.Success(null))
+        MutableStateFlow<UserCharacterDetailUIState>(UserCharacterDetailUIState.Success(null))
 
-    val characterUiState: StateFlow<CharacterDetailUIState> = _characterUiState
+    val characterUiState: StateFlow<UserCharacterDetailUIState> = _characterUiState
 
-    fun fetchUserList(graphqlRepoFlow: GraphqlRepoFlow) {
+    fun fetchUserCharacterList(graphqlRepoFlow: GraphqlRepoFlow) {
         viewModelScope.launch {
-            graphqlRepoFlow.fetchCharacterListRDSCall()
+            graphqlRepoFlow.fetchUserCharacterListRDSCall()
                 .catch { exception ->
-                    _uiState.value = CharacterListUIState.Failure(exception)
+                    _uiState.value = UserCharacterListUIState.Failure(exception)
                 }.collect {
-                    _uiState.value = CharacterListUIState.Success(it.data?.characters?.results)
+                    _uiState.value = UserCharacterListUIState.Success(it.data?.characters?.results)
                 }
         }
     }
 
-    fun fetchCharacter(userId: String, graphqlRepoFlow: GraphqlRepoFlow) {
+    fun fetchUserCharacter(userId: String, graphqlRepoFlow: GraphqlRepoFlow) {
         viewModelScope.launch {
-            graphqlRepoFlow.fetchCharacterDetailRDSCall(userId)
+            graphqlRepoFlow.fetchUserCharacterDetailRDSCall(userId)
                 .catch { exception ->
-                    _characterUiState.value = CharacterDetailUIState.Failure(exception)
+                    _characterUiState.value = UserCharacterDetailUIState.Failure(exception)
                 }
                 .collect {
-                    _characterUiState.value = CharacterDetailUIState.Success(it.data?.character)
+                    _characterUiState.value = UserCharacterDetailUIState.Success(it.data?.character)
                 }
         }
     }

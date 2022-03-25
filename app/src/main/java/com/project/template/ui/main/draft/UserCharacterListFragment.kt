@@ -15,15 +15,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.project.template.CharactersListQuery
 import com.project.template.databinding.FragmentCharacterListBinding
-import com.project.template.model.CharacterListUIState
+import com.project.template.model.UserCharacterListUIState
 import com.project.template.network.MyOkhttpClient
 import com.project.template.repo.draft.GraphqlRdsFlow
 import com.project.template.repo.draft.GraphqlRepoFlow
 import com.project.template.repo.draft.GraphqlViewModel
-import com.project.template.ui.main.adapter.UserListAdapter
+import com.project.template.ui.main.adapter.UserCharacterListAdapter
 import kotlinx.coroutines.launch
 
-class CharacterListFragment : Fragment() {
+class UserCharacterListFragment : Fragment() {
 
     private val graphqlViewModel: GraphqlViewModel by activityViewModels()
     private lateinit var binding: FragmentCharacterListBinding
@@ -51,16 +51,16 @@ class CharacterListFragment : Fragment() {
     }
 
     private fun launchGraphQl(view: View, graphqlRepoFlow: GraphqlRepoFlow) {
-        graphqlViewModel.fetchUserList(graphqlRepoFlow)
+        graphqlViewModel.fetchUserCharacterList(graphqlRepoFlow)
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 graphqlViewModel.uiState.collect {
                     when (it) {
-                        is CharacterListUIState.Success -> {
+                        is UserCharacterListUIState.Success -> {
                             Log.i("-----> ", "${it.userResultList}")
                             updateUserListAdapter(it.userResultList)
                         }
-                        is CharacterListUIState.Failure -> {
+                        is UserCharacterListUIState.Failure -> {
                             showSnackBar(view, it.exception.message.toString())
                         }
                     }
@@ -74,9 +74,9 @@ class CharacterListFragment : Fragment() {
     }
 
     private fun updateUserListAdapter(userList: List<CharactersListQuery.Result?>?) {
-        val userListAdapter = UserListAdapter(userList)
+        val userCharacterListAdapter = UserCharacterListAdapter(userList)
         userListRecyclerView = binding.characterRecyclerView
-        userListRecyclerView.adapter = userListAdapter
+        userListRecyclerView.adapter = userCharacterListAdapter
         userListRecyclerView.layoutManager = LinearLayoutManager(activity)
     }
 

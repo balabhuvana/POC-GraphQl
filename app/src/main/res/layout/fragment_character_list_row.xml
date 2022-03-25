@@ -23,7 +23,6 @@
             android:padding="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_marginStart="@dimen/dp_10"
-            android:text="@string/register_email"
             android:layout_height="wrap_content"/>
 
     <TextView
@@ -33,7 +32,6 @@
             android:layout_width="wrap_content"
             android:padding="@dimen/dp_5"
             android:layout_marginStart="@dimen/dp_10"
-            android:text="@string/register_email"
             android:layout_height="wrap_content"/>
 
     <TextView
@@ -43,7 +41,6 @@
             android:layout_width="wrap_content"
             android:padding="@dimen/dp_5"
             android:layout_marginStart="@dimen/dp_10"
-            android:text="@string/register_email"
             android:layout_height="wrap_content"/>
 
 
